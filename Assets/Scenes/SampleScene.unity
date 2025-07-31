@@ -313,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1191392898327886120, guid: d2fb1ddbe26ab4544b15a70cff4504f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.98
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 1191392898327886120, guid: d2fb1ddbe26ab4544b15a70cff4504f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -565,6 +565,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6405410431654318843, guid: 9a989cc5a52f16d41837d1daf15aea0e, type: 3}
+      propertyPath: springInitialVelocity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7701662117564941410, guid: 9a989cc5a52f16d41837d1daf15aea0e, type: 3}
       propertyPath: m_Name
       value: Player

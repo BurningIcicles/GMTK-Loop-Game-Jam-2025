@@ -25,7 +25,7 @@ public class MovingPlatformController : MonoBehaviour
     void Start()
     {
         _forward = true;
-        _loop = false;
+        _loop = true;
         SetStartingPosition();
     }
 
