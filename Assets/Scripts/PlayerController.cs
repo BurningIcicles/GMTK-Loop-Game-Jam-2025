@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
             Jump();
     }
 
-    public void Spring()
+    private void Spring()
     {
         _rigidbody.AddForce(Vector2.up*springInitialVelocity, ForceMode2D.Impulse);
     }
