@@ -24,6 +24,7 @@ public class MovingPlatformController : MonoBehaviour
     void Start()
     {
         forward = true;
+        SetStartingPosition();
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class MovingPlatformController : MonoBehaviour
         }
     }
 
-    public void StartMoving()
+    public void SetStartingPosition()
     {
         platform.transform.position = startPoint.transform.position;
     }
