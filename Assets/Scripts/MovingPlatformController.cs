@@ -20,10 +20,12 @@ public class MovingPlatformController : MonoBehaviour
 
     // if forward is true, move platform from start to end position
     // else, move platform from end to start position
-    private bool forward;
+    private bool _forward;
+    private bool _loop;
     void Start()
     {
-        forward = true;
+        _forward = true;
+        _loop = false;
         SetStartingPosition();
     }
 
@@ -34,14 +36,14 @@ public class MovingPlatformController : MonoBehaviour
         platform.transform.position = Vector2.Lerp(platform.transform.position, target, Time.deltaTime);
         
         float distance = Vector2.Distance(platform.transform.position, target);
-        if (distance <= 0.1f)
-            forward = !forward;
+        if (_loop && distance <= 0.1f)
+            _forward = !_forward;
 
     }
 
     private Vector2 GetTarget()
     {
-        return forward ? endPoint.transform.position : startPoint.transform.position;
+        return _forward ? endPoint.transform.position : startPoint.transform.position;
     }
 
     private void OnDrawGizmos()
