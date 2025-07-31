@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float jumpInitialVelocity = 10;
 
+    [SerializeField] private float springInitialVelocity = 20;
+
     private float _jumpVelocity;
     private Vector2 _dirJump;
     private bool _isGrounded;
@@ -33,6 +35,11 @@ public class PlayerController : MonoBehaviour
             Jump();
     }
 
+    public void Spring()
+    {
+        _rigidbody.AddForce(Vector2.up*springInitialVelocity, ForceMode2D.Impulse);
+    }
+
     private void Jump()
     {
         _rigidbody.AddForce(Vector2.up*jumpInitialVelocity, ForceMode2D.Impulse);
@@ -44,6 +51,11 @@ public class PlayerController : MonoBehaviour
         {
             _isGrounded = true;
         }
+
+        if (other.gameObject.CompareTag("Spring"))
+        {
+            Spring();
+        }
     }
   
     private void OnCollisionExit2D(Collision2D other)
@@ -51,6 +63,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Floor"))
         {
             _isGrounded = false;
+        }
+
+        if (other.gameObject.CompareTag("Spring"))
+        {
+            Spring();
         }
     }
 }
