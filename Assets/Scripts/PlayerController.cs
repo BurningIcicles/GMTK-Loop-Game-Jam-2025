@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private float _jumpVelocity;
     private Vector2 _dirJump;
+    [SerializeField]
     private bool _isGrounded;
     private bool _isWalking;
     
@@ -59,16 +60,12 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        _rigidbody.AddForce(Vector2.up*jumpInitialVelocity, ForceMode2D.Impulse);
+        DetachToPlatform();
+        _rigidbody.AddForce(Vector2.up * jumpInitialVelocity, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Floor"))
-        {
-            _isGrounded = true;
-        }
-
         if (other.gameObject.CompareTag("Spring"))
         {
             Spring();
@@ -77,10 +74,21 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null)
+        if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null && _isGrounded)
         {
-            gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
-            gameObject.transform.parent = other.transform;
+            Debug.Log($"attaching: {other.gameObject.name}");
+            AttachToPlatform(other);
+        }
+
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            ContactPoint2D contact = other.GetContact(0);
+            Vector2 contactPoint = contact.point;
+            Vector3 center = contact.collider.bounds.center;
+            if (contactPoint.y > center.y)
+            {
+                _isGrounded = true;
+            }
         }
     }
   
@@ -93,8 +101,18 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null)
         {
-            gameObject.GetComponent<Rigidbody2D>().isKinematic = false;
-            gameObject.transform.parent = null;
+            Debug.Log($"detaching: {other.gameObject.name}");
+            DetachToPlatform();
         }
+    }
+
+    private void AttachToPlatform(Collision2D other)
+    {
+        gameObject.transform.parent = other.transform;
+    }
+
+    private void DetachToPlatform()
+    {
+        gameObject.transform.parent = null;
     }
 }
