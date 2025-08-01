@@ -184,8 +184,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b60aac56f428384ea8f284bbdae465b
-      internalID: -1184636272
+      spriteID: df289d1d54c84e8418c7913da9ac392c
+      internalID: 1457619475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f90e374f390650e4d8411be3689b521d
+      internalID: -1903311569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tileset_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d8d8833ab7f84b49adba883aac728d2
+      internalID: 896502287
       vertices: []
       indices: 
       edges: []
@@ -202,7 +244,9 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Tileset_0: -1288566266
-      Tileset_1: -1184636272
+      Tileset_1: 1457619475
+      Tileset_2: -1903311569
+      Tileset_3: 896502287
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
