@@ -15,10 +15,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float springInitialVelocity = 20;
 
     private float _jumpVelocity;
+    private float _gravityScale;
     private Vector2 _dirJump;
-    [SerializeField]
     private bool _isGrounded;
     private bool _isWalking;
+    [SerializeField]
+    private bool _isFloating;
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         _isGrounded = true;
         _isWalking = false;
+        _gravityScale = 3;
     }
 
     // Update is called once per frame
@@ -42,15 +45,25 @@ public class PlayerController : MonoBehaviour
 
         if (!_isGrounded || _isWalking)
         {
-            _rigidbody.isKinematic = false;
             transform.parent = null;
         }
 
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-        transform.position += movement * (Time.deltaTime * speed);
+        if (Input.GetAxisRaw("Horizontal") != 0)
+            Move();
 
         if (Input.GetKey(KeyCode.Space) && _isGrounded)
             Jump();
+    }
+
+    public void Move()
+    {
+        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+        transform.position += movement * (Time.deltaTime * speed);
+        if (_isFloating)
+        {
+            _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            _isFloating = false;
+        }
     }
 
     private void Spring()
@@ -62,6 +75,11 @@ public class PlayerController : MonoBehaviour
     {
         DetachToPlatform();
         _rigidbody.AddForce(Vector2.up * jumpInitialVelocity, ForceMode2D.Impulse);
+        if (_isFloating)
+        {
+            _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+            _isFloating = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -76,7 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null && _isGrounded)
         {
-            Debug.Log($"attaching: {other.gameObject.name}");
             AttachToPlatform(other);
         }
 
@@ -114,5 +131,11 @@ public class PlayerController : MonoBehaviour
     private void DetachToPlatform()
     {
         gameObject.transform.parent = null;
+    }
+
+    public void Float()
+    {
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+        _isFloating = true;
     }
 }
