@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8947cdfdc83e77b4fadfd9534e2bd74d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTransitionAnimator: {fileID: 0}
 --- !u!114 &147779850309808738
 MonoBehaviour:
   m_ObjectHideFlags: 0

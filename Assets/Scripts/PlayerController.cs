@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
     private float _jumpVelocity;
     private Vector2 _dirJump;
-    private bool _isGrounded;
+    [FormerlySerializedAs("_isGrounded")] [SerializeField]
+    private bool isGrounded;
     private bool _isWalking;
     [SerializeField]
     private bool isFloating;
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         _sceneController = GameObject.FindObjectOfType<SceneController>();
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
-        _isGrounded = true;
+        isGrounded = true;
         _isWalking = false;
     }
 
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
             _isWalking = true;
         }
 
-        if (!_isGrounded || _isWalking)
+        if (!isGrounded || _isWalking)
         {
             transform.parent = null;
         }
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") != 0)
             Move();
 
-        if (Input.GetKey(KeyCode.Space) && _isGrounded)
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
             Jump();
         
         if (Input.GetKey(KeyCode.Space) && isFloating)
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null && _isGrounded)
+        if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null && isGrounded)
         {
             AttachToPlatform(other);
         }
@@ -103,10 +104,9 @@ public class PlayerController : MonoBehaviour
         {
             ContactPoint2D contact = other.GetContact(0);
             Vector2 contactPoint = contact.point;
-            Vector3 center = contact.collider.bounds.center;
-            if (contactPoint.y > center.y)
+            if (gameObject.transform.position.y > contactPoint.y)
             {
-                _isGrounded = true;
+                isGrounded = true;
             }
         }
     }
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Floor"))
         {
-            _isGrounded = false;
+            isGrounded = false;
         }
 
         if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null)
