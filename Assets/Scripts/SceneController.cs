@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class SceneController : MonoBehaviour
 {
@@ -16,15 +12,21 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         Animator[] animators = FindObjectsOfType<Animator>();
-        Debug.Log($"Found {animators.Length} animators");
         foreach (Animator animator in animators)
         {
-            Debug.Log($"Found {animator.gameObject.name} animator");
             if (animator.GetComponent<Animator>().name == "Level Transition")
             {
                 _levelTransitionAnimator = animator;
                 break;
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            
         }
     }
 
