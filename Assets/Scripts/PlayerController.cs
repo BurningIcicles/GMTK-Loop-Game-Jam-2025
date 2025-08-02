@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && _isGrounded)
             Jump();
+        
+        if (Input.GetKey(KeyCode.Space) && isFloating)
+            Ground();
     }
 
     public void Move()
@@ -61,13 +64,13 @@ public class PlayerController : MonoBehaviour
         transform.position += movement * (Time.deltaTime * speed);
         if (isFloating)
         {
-            _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            isFloating = false;
+            Ground();
         }
     }
 
     private void Spring()
     {
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0);
         _rigidbody.AddForce(Vector2.up*springInitialVelocity, ForceMode2D.Impulse);
     }
 
@@ -77,8 +80,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody.AddForce(Vector2.up * jumpInitialVelocity, ForceMode2D.Impulse);
         if (isFloating)
         {
-            _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            isFloating = false;
+            Ground();
         }
     }
 
@@ -144,5 +146,11 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         isFloating = true;
+    }
+
+    public void Ground()
+    {
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        isFloating = false;
     }
 }

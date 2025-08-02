@@ -2721,6 +2721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 6176766842508230378, guid: 31d73c2f55508c849854045078e85b5f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8711881744987887430, guid: 31d73c2f55508c849854045078e85b5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.04
@@ -3020,10 +3024,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 594425462}
+  - {fileID: 1654312455}
   - {fileID: 843564643}
   - {fileID: 3422789824371066086}
   - {fileID: 680007879}
   - {fileID: 1760772179}
   - {fileID: 343039763}
-  - {fileID: 1654312455}
   - {fileID: 41194144}
