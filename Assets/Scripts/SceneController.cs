@@ -10,9 +10,23 @@ public class SceneController : MonoBehaviour
 {
     private static readonly int Exit = Animator.StringToHash("Exit");
     private static readonly int Enter = Animator.StringToHash("Enter");
-    [SerializeField]
-    private Animator levelTransitionAnimator;
+    private Animator _levelTransitionAnimator;
     private DontDestroyOnLoad _dontDestroyOnLoad;
+
+    private void Start()
+    {
+        Animator[] animators = FindObjectsOfType<Animator>();
+        Debug.Log($"Found {animators.Length} animators");
+        foreach (Animator animator in animators)
+        {
+            Debug.Log($"Found {animator.gameObject.name} animator");
+            if (animator.GetComponent<Animator>().name == "Level Transition")
+            {
+                _levelTransitionAnimator = animator;
+                break;
+            }
+        }
+    }
 
     public void NextLevel()
     {
@@ -21,9 +35,9 @@ public class SceneController : MonoBehaviour
 
     IEnumerator LoadLevel()
     {
-        levelTransitionAnimator.SetTrigger(Exit);
+        _levelTransitionAnimator.SetTrigger(Exit);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
-        levelTransitionAnimator.SetTrigger(Enter);
+        _levelTransitionAnimator.SetTrigger(Enter);
     }
 }

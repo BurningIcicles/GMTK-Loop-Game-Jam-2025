@@ -50,8 +50,7 @@ public class MovingPlatformController : MonoBehaviour
     {
         if (startPoint != null && endPoint != null)
         {
-            Gizmos.DrawLine(gameObject.transform.position, startPoint.transform.position);
-            Gizmos.DrawLine(gameObject.transform.position, endPoint.transform.position);
+            Gizmos.DrawLine(startPoint.transform.position, endPoint.transform.position);
         }
     }
 
