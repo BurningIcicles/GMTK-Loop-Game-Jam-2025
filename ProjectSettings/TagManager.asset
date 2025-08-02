@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Spring
+  - Portal
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _boxCollider;
+    private SceneController _sceneController;
     [SerializeField]
     private int speed = 40; // default value of 40
     [SerializeField]
@@ -15,20 +16,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float springInitialVelocity = 20;
 
     private float _jumpVelocity;
-    private float _gravityScale;
     private Vector2 _dirJump;
     private bool _isGrounded;
     private bool _isWalking;
     [SerializeField]
-    private bool _isFloating;
+    private bool isFloating;
     
     // Start is called before the first frame update
     void Start()
     {
+        _sceneController = GameObject.FindObjectOfType<SceneController>();
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         _isGrounded = true;
         _isWalking = false;
-        _gravityScale = 3;
     }
 
     // Update is called once per frame
@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
         transform.position += movement * (Time.deltaTime * speed);
-        if (_isFloating)
+        if (isFloating)
         {
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            _isFloating = false;
+            isFloating = false;
         }
     }
 
@@ -75,10 +75,10 @@ public class PlayerController : MonoBehaviour
     {
         DetachToPlatform();
         _rigidbody.AddForce(Vector2.up * jumpInitialVelocity, ForceMode2D.Impulse);
-        if (_isFloating)
+        if (isFloating)
         {
             _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            _isFloating = false;
+            isFloating = false;
         }
     }
 
@@ -118,8 +118,15 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.GetComponentInParent<MovingPlatformController>() != null)
         {
-            Debug.Log($"detaching: {other.gameObject.name}");
             DetachToPlatform();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Portal"))
+        {
+            _sceneController.NextLevel();
         }
     }
 
@@ -136,6 +143,6 @@ public class PlayerController : MonoBehaviour
     public void Float()
     {
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-        _isFloating = true;
+        isFloating = true;
     }
 }
