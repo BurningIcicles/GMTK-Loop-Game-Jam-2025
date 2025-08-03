@@ -118,7 +118,6 @@ public class PlayerController : MonoBehaviour
             Vector2 contactPoint = contact.point;
             if (gameObject.transform.position.y  - (_boxCollider.bounds.size.y / 2f)  > contactPoint.y)
             {
-                Debug.Log($"this.y: {gameObject.transform.position.y}, other.y: {contactPoint.y}");
                 isGrounded = true;
             }
         }
