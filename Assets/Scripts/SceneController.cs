@@ -26,7 +26,7 @@ public class SceneController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            
+            Debug.Log("escape");
         }
     }
 

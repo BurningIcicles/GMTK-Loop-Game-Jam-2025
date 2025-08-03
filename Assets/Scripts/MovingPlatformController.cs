@@ -9,10 +9,8 @@ public class MovingPlatformController : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private GameObject platform;
-    [SerializeField]
-    private GameObject startPoint;
-    [SerializeField]
-    private GameObject endPoint;
+    private GameObject _startPoint;
+    private GameObject _endPoint;
     [SerializeField]
     private float speed;
     [SerializeField] 
@@ -26,6 +24,23 @@ public class MovingPlatformController : MonoBehaviour
     {
         _forward = true;
         _loop = false;
+        var children = new List<Transform>();
+        for (int i = 0; i < this.gameObject.transform.childCount; i++)
+        {
+            children.Add(this.gameObject.transform.GetChild(i));
+        }
+
+        for (int i = 0; i < children.Count; i++)
+        {
+            if (children[i].gameObject.CompareTag("Start Position"))
+            {
+                _startPoint = children[i].gameObject;
+            } else if (children[i].gameObject.CompareTag("End Position"))
+            {
+                _endPoint = children[i].gameObject;
+            }
+        }
+        
         SetStartingPosition();
     }
 
@@ -43,19 +58,19 @@ public class MovingPlatformController : MonoBehaviour
 
     private Vector2 GetTarget()
     {
-        return _forward ? endPoint.transform.position : startPoint.transform.position;
+        return _forward ? _endPoint.transform.position : _startPoint.transform.position;
     }
 
     private void OnDrawGizmos()
     {
-        if (startPoint != null && endPoint != null)
+        if (_startPoint != null && _endPoint != null)
         {
-            Gizmos.DrawLine(startPoint.transform.position, endPoint.transform.position);
+            Gizmos.DrawLine(_startPoint.transform.position, _endPoint.transform.position);
         }
     }
 
     public void SetStartingPosition()
     {
-        platform.transform.position = startPoint.transform.position;
+        platform.transform.position = _startPoint.transform.position;
     }
 }

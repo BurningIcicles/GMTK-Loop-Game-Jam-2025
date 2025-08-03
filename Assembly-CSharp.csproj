@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\LoopController.cs" />
      <Compile Include="Assets\Scripts\DontDestroyOnLoad.cs" />
+     <Compile Include="Assets\Scripts\SliderController.cs" />
      <Compile Include="Assets\Scripts\SFXController.cs" />
      <Compile Include="Assets\Scripts\MovingPlatformController.cs" />
      <Compile Include="Assets\Scripts\SceneController.cs" />
@@ -77,9 +78,11 @@
      <Folder Include="Assets\Animations" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <Folder Include="Assets\TextMesh Pro\Shaders" />
+     <Folder Include="Assets\UI" />
      <Folder Include="Assets\TextMesh Pro\Resources\Style Sheets" />
      <Folder Include="Assets\TextMesh Pro\Fonts" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <Folder Include="Assets\Music" />
      <Folder Include="Assets\Sprites" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <Folder Include="Assets\Tile Palettes" />

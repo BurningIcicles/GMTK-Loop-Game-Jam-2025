@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 3438446078870136365}
   m_Layer: 0
   m_Name: Start Position
-  m_TagString: Untagged
+  m_TagString: Start Position
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 280128679082371859}
   m_Layer: 0
   m_Name: End Position
-  m_TagString: Untagged
+  m_TagString: End Position
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

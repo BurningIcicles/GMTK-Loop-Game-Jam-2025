@@ -2849,15 +2849,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2694621821580891706, guid: c5f46d76e5bf63c49ae3c34ae01256c7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2694621821580891706, guid: c5f46d76e5bf63c49ae3c34ae01256c7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2694621821580891706, guid: c5f46d76e5bf63c49ae3c34ae01256c7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2694621821580891706, guid: c5f46d76e5bf63c49ae3c34ae01256c7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2945,6 +2945,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2932611069417444159, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2932611069417444159, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3905650202164826117, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -3029,9 +3037,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7598479446461149100, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
-      propertyPath: m_Name
-      value: Background
+    - target: {fileID: 8267355139293983142, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267355139293983142, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267355139293983142, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779314797534513965, guid: da54d807701204d4fb9b31d4b108c3e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3053,8 +3073,8 @@ SceneRoots:
   - {fileID: 3422789824371066086}
   - {fileID: 680007879}
   - {fileID: 1760772179}
+  - {fileID: 1705093729}
   - {fileID: 343039763}
   - {fileID: 41194144}
   - {fileID: 594425462}
-  - {fileID: 1705093729}
   - {fileID: 1086372990}
