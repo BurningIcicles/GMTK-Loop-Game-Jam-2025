@@ -43,18 +43,37 @@ public class MovingPlatformController : MonoBehaviour
         }
         
         SetStartingPosition();
+        StartCoroutine(MovePlatform());
+    }
+
+    IEnumerator MovePlatform()
+    {
+        yield return new WaitForSeconds(delay);
+        Vector2 target = GetTarget();
+        float elapsed = 0f;
+        float duration = 1f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            _platform.transform.position = Vector2.Lerp(_platform.transform.position, target, t);
+            yield return null;
+        }
+        
+        _platform.transform.position = target;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 target = GetTarget();
-        _platform.transform.position = Vector2.Lerp(_platform.transform.position, target, Time.deltaTime);
-        
-        float distance = Vector2.Distance(_platform.transform.position, target);
-        if (_loop && distance <= 0.1f)
-            _forward = !_forward;
-
+        if (_loop)
+        {
+            Vector2 target = GetTarget();
+            float distance = Vector2.Distance(_platform.transform.position, target);
+            if (distance <= 0.1f) 
+                _forward = !_forward;
+        }
     }
 
     private Vector2 GetTarget()
