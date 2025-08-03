@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     [SerializeField]
     private bool isFloating;
+
+    private Animator _playerAnimator;
     private Animator _loopAnimator;
     private SpriteRenderer _loopSprite;
     
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
         _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         isGrounded = true;
         _isWalking = false;
+        _playerAnimator = GetComponent<Animator>();
         _loopAnimator = transform.Find("Loop").GetComponent<Animator>();
         _loopSprite = transform.Find("Loop").GetComponent<SpriteRenderer>();
     }
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetAxisRaw("Horizontal") != 0)
             Move();
+        else
+            Idle();
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
             Jump();
@@ -69,6 +74,25 @@ public class PlayerController : MonoBehaviour
         {
             Ground();
         }
+
+        Vector2 localScale = transform.localScale;
+
+        if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            localScale.x = -Mathf.Abs(localScale.x);
+        }
+        else
+        {
+            localScale.x = Mathf.Abs(localScale.x); 
+        }
+
+        transform.localScale = localScale;
+        _playerAnimator.SetTrigger("Walk");
+    }
+
+    private void Idle()
+    {
+        _playerAnimator.SetTrigger("Idle");
     }
 
     private void Spring()
