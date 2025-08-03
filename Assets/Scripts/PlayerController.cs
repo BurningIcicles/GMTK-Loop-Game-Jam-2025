@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _sceneController = GameObject.FindObjectOfType<SceneController>();
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
         _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         isGrounded = true;
@@ -142,6 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Portal"))
         {
+            _sceneController = GameObject.FindObjectOfType<SceneController>();
             _sceneController.NextLevel();
         }
     }
