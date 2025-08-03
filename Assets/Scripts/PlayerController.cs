@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     [SerializeField]
     private bool isFloating;
+    private Animator _loopAnimator;
+    private SpriteRenderer _loopSprite;
     
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class PlayerController : MonoBehaviour
         _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         isGrounded = true;
         _isWalking = false;
+        _loopAnimator = transform.Find("Loop").GetComponent<Animator>();
+        _loopSprite = transform.Find("Loop").GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -154,12 +158,16 @@ public class PlayerController : MonoBehaviour
 
     public void Float()
     {
+        _loopSprite.enabled = true;
+        // _loopAnimator.Pla();
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         isFloating = true;
     }
 
     public void Ground()
     {
+        _loopSprite.enabled = false;
+        // _loopAnimator.StopPlayback();
         _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         isFloating = false;
     }

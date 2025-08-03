@@ -11,6 +11,7 @@ TagManager:
   - End Position
   - Main Canvas
   - Pause Container
+  - Loop
   layers:
   - Default
   - TransparentFX
