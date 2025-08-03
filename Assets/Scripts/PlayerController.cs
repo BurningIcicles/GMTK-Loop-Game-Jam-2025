@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour
         {
             _sceneController = GameObject.FindObjectOfType<SceneController>();
             _sceneController.NextLevel();
+            Destroy(other.gameObject);
         }
     }
 
