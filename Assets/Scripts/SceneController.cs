@@ -13,15 +13,7 @@ public class SceneController : MonoBehaviour
     private void Start()
     {
         _mainCanvas = GameObject.FindGameObjectWithTag("Main Canvas").GetComponent<Canvas>();
-        Animator[] animators = FindObjectsOfType<Animator>();
-        foreach (Animator animator in animators)
-        {
-            if (animator.GetComponent<Animator>().name == "Level Transition")
-            {
-                _levelTransitionAnimator = animator;
-                break;
-            }
-        }
+       
     }
 
     private void Update()
@@ -53,6 +45,15 @@ public class SceneController : MonoBehaviour
 
     IEnumerator LoadLevel()
     {
+        Animator[] animators = FindObjectsOfType<Animator>();
+        foreach (Animator animator in animators)
+        {
+            if (animator.GetComponent<Animator>().name == "Level Transition")
+            {
+                _levelTransitionAnimator = animator;
+                break;
+            }
+        }
         _levelTransitionAnimator.SetTrigger(Exit);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
