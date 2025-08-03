@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
@@ -59,17 +60,26 @@ public class PlayerController : MonoBehaviour
         else
             Idle();
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             Jump();
         
         if (Input.GetKey(KeyCode.Space) && isFloating)
             Ground();
+        
+        if (IsTouchingWall() && !isGrounded)
+        {
+            _rigidbody.velocity = new Vector2(0f, _rigidbody.velocity.y);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        float inputX = Input.GetAxisRaw("Horizontal");
+        _rigidbody.velocity = new Vector2(inputX * speed, _rigidbody.velocity.y);
     }
 
     public void Move()
     {
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-        transform.position += movement * (Time.deltaTime * speed);
         if (isFloating)
         {
             Ground();
@@ -94,6 +104,14 @@ public class PlayerController : MonoBehaviour
     {
         _playerAnimator.SetTrigger("Idle");
     }
+    
+    private bool IsTouchingWall()
+    {
+        float distance = 0.1f;
+        Vector2 direction = transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, LayerMask.GetMask("Floor"));
+        return hit.collider != null;
+    }
 
     private void Spring()
     {
@@ -104,7 +122,7 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         DetachToPlatform();
-        _rigidbody.AddForce(Vector2.up * jumpInitialVelocity, ForceMode2D.Impulse);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpInitialVelocity);
         if (isFloating)
         {
             Ground();
@@ -130,20 +148,20 @@ public class PlayerController : MonoBehaviour
         {
             ContactPoint2D[] contacts = new ContactPoint2D[10];
             int count = other.GetContacts(contacts);
-            
-            ContactPoint2D contact = contacts[0];
+
+            Bounds bounds = _boxCollider.bounds;
+
             for (int i = 0; i < count; i++)
             {
-                if (contacts[i].point.y > contact.point.y)
+                Vector2 point = contacts[i].point;
+                bool withinHorizontal = point.x >= bounds.min.x && point.x <= bounds.max.x;
+                bool belowPlayer = point.y < bounds.center.y;
+
+                if (withinHorizontal && belowPlayer)
                 {
-                    contact = contacts[i];
+                    isGrounded = true;
+                    return;
                 }
-            }
-            
-            Vector2 contactPoint = contact.point;
-            if (gameObject.transform.position.y  - (_boxCollider.bounds.size.y / 2f)  > contactPoint.y)
-            {
-                isGrounded = true;
             }
         }
     }

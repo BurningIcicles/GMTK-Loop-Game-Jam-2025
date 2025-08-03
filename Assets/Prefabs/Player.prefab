@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jumpInitialVelocity: 5
+  jumpInitialVelocity: 10
   springInitialVelocity: 20
   isGrounded: 0
   isFloating: 0
