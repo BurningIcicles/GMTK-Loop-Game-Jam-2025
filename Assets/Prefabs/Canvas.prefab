@@ -245,9 +245,9 @@ RectTransform:
   - {fileID: 932937109291012054}
   - {fileID: 6929813637181238412}
   - {fileID: 7237518794183419017}
-  - {fileID: 6545422322112153864}
   - {fileID: 4463498609250137282}
   - {fileID: 2998598355994318083}
+  - {fileID: 6545422322112153864}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
