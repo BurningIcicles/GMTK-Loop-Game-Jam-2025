@@ -11,11 +11,11 @@ public class LoopController : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("click");
         MovingPlatformController[] movingPlatforms = GameObject.FindObjectsOfType<MovingPlatformController>();
         foreach (MovingPlatformController movingPlatform in movingPlatforms)
         {
             movingPlatform.SetStartingPosition();
+            movingPlatform.SetStarting(true);
         }
         
         _player.Float();

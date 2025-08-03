@@ -18,10 +18,12 @@ public class MovingPlatformController : MonoBehaviour
     // else, move platform from end to start position
     private bool _forward;
     private bool _loop;
+    private bool _starting;
     void Start()
     {
         _forward = true;
         _loop = false;
+        _starting = true;
         var children = new List<Transform>();
         for (int i = 0; i < this.gameObject.transform.childCount; i++)
         {
@@ -43,11 +45,12 @@ public class MovingPlatformController : MonoBehaviour
         }
         
         SetStartingPosition();
-        StartCoroutine(MovePlatform());
     }
 
     IEnumerator MovePlatform()
     {
+        SetStarting(false);
+        SetStartingPosition();
         yield return new WaitForSeconds(delay);
         Vector2 target = GetTarget();
         float elapsed = 0f;
@@ -73,6 +76,11 @@ public class MovingPlatformController : MonoBehaviour
             float distance = Vector2.Distance(_platform.transform.position, target);
             if (distance <= 0.1f) 
                 _forward = !_forward;
+        }
+
+        if (_starting)
+        {
+            StartCoroutine(MovePlatform());
         }
     }
 
@@ -101,5 +109,10 @@ public class MovingPlatformController : MonoBehaviour
     public void SetStartingPosition()
     {
         _platform.transform.position = _startPoint.transform.position;
+    }
+
+    public void SetStarting(bool starting)
+    {
+        this._starting = starting;
     }
 }
