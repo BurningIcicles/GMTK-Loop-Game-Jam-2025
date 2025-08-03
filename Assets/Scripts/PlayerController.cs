@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         _sceneController = GameObject.FindObjectOfType<SceneController>();
         _rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         isGrounded = true;
         _isWalking = false;
     }
@@ -102,10 +103,22 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Floor"))
         {
-            ContactPoint2D contact = other.GetContact(0);
-            Vector2 contactPoint = contact.point;
-            if (gameObject.transform.position.y > contactPoint.y)
+            ContactPoint2D[] contacts = new ContactPoint2D[10];
+            int count = other.GetContacts(contacts);
+            
+            ContactPoint2D contact = contacts[0];
+            for (int i = 0; i < count; i++)
             {
+                if (contacts[i].point.y > contact.point.y)
+                {
+                    contact = contacts[i];
+                }
+            }
+            
+            Vector2 contactPoint = contact.point;
+            if (gameObject.transform.position.y  - (_boxCollider.bounds.size.y / 2f)  > contactPoint.y)
+            {
+                Debug.Log($"this.y: {gameObject.transform.position.y}, other.y: {contactPoint.y}");
                 isGrounded = true;
             }
         }
