@@ -9,6 +9,8 @@ TagManager:
   - Portal
   - Start Position
   - End Position
+  - Main Canvas
+  - Pause Container
   layers:
   - Default
   - TransparentFX

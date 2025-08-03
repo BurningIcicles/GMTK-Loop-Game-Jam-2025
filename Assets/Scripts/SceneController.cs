@@ -34,7 +34,16 @@ public class SceneController : MonoBehaviour
 
     private void ShowPauseMenu()
     {
-        
+        Time.timeScale = 0;
+        GameObject pauseMenu = GameObject.FindGameObjectWithTag("Pause Container").transform.GetChild(0).gameObject;
+        pauseMenu.SetActive(true);
+    }
+
+    public void HidePauseMenu()
+    {
+        Time.timeScale = 1;
+        GameObject pauseMenu = GameObject.FindGameObjectWithTag("Pause Container").transform.GetChild(0).gameObject;
+        pauseMenu.SetActive(false);
     }
 
     public void NextLevel()
