@@ -6,9 +6,7 @@ using UnityEngine;
 
 public class MovingPlatformController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    private GameObject platform;
+    private GameObject _platform;
     private GameObject _startPoint;
     private GameObject _endPoint;
     [SerializeField]
@@ -38,6 +36,9 @@ public class MovingPlatformController : MonoBehaviour
             } else if (children[i].gameObject.CompareTag("End Position"))
             {
                 _endPoint = children[i].gameObject;
+            } else if (children[i].gameObject.CompareTag("Floor"))
+            {
+                _platform = children[i].gameObject;
             }
         }
         
@@ -48,9 +49,9 @@ public class MovingPlatformController : MonoBehaviour
     void Update()
     {
         Vector2 target = GetTarget();
-        platform.transform.position = Vector2.Lerp(platform.transform.position, target, Time.deltaTime);
+        _platform.transform.position = Vector2.Lerp(_platform.transform.position, target, Time.deltaTime);
         
-        float distance = Vector2.Distance(platform.transform.position, target);
+        float distance = Vector2.Distance(_platform.transform.position, target);
         if (_loop && distance <= 0.1f)
             _forward = !_forward;
 
@@ -71,6 +72,6 @@ public class MovingPlatformController : MonoBehaviour
 
     public void SetStartingPosition()
     {
-        platform.transform.position = _startPoint.transform.position;
+        _platform.transform.position = _startPoint.transform.position;
     }
 }

@@ -48,8 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform: {fileID: 0}
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
   speed: 0.0001
   delay: 0
 --- !u!1 &5275115133004978764
@@ -193,7 +191,7 @@ GameObject:
   - component: {fileID: 2067236735614293681}
   m_Layer: 0
   m_Name: Start Position
-  m_TagString: Untagged
+  m_TagString: Start Position
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,7 +222,7 @@ GameObject:
   - component: {fileID: 6955302681700100175}
   m_Layer: 0
   m_Name: End Position
-  m_TagString: Untagged
+  m_TagString: End Position
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
