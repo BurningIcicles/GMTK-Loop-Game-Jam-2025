@@ -8,9 +8,11 @@ public class SceneController : MonoBehaviour
     private static readonly int Enter = Animator.StringToHash("Enter");
     private Animator _levelTransitionAnimator;
     private DontDestroyOnLoad _dontDestroyOnLoad;
+    private Canvas _mainCanvas;
 
     private void Start()
     {
+        _mainCanvas = GameObject.FindGameObjectWithTag("Main Canvas").GetComponent<Canvas>();
         Animator[] animators = FindObjectsOfType<Animator>();
         foreach (Animator animator in animators)
         {
@@ -26,8 +28,13 @@ public class SceneController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Debug.Log("escape");
+            ShowPauseMenu();
         }
+    }
+
+    private void ShowPauseMenu()
+    {
+        
     }
 
     public void NextLevel()
