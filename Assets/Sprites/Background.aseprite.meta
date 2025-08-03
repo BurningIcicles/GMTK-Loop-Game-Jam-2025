@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 894ba11b8cd676a4e8191746440d9c3f
+guid: b48ce574218ab244a826318d1fa2c2a4
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -119,18 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Tileset
+  - name: Background
     originalName: 
-    pivot: {x: 0.5, y: -3}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 256
+      width: 64
       height: 64
-    spriteID: 1e43bd4f507e4294f9274c989882ea37
+    spriteID: 915df804f54bfc44daa8df7c63fe2e9c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -142,23 +142,23 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1060484802
-    name: Tileset
+    guid: -1021688250
+    name: Background
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Tileset
+    - name: Background
       frameIndex: 0
       cellRect:
         x: 0
-        y: 192
-        width: 256
+        y: 0
+        width: 64
         height: 64
-      spriteId: 1e43bd4f507e4294f9274c989882ea37
+      spriteId: 915df804f54bfc44daa8df7c63fe2e9c
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 256, y: 256}
+  canvasSize: {x: 64, y: 64}
