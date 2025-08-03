@@ -1,8 +1,11 @@
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int Move1 = Animator.StringToHash("Move");
+    private static readonly int Idle1 = Animator.StringToHash("Idle");
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _boxCollider;
     private SceneController _sceneController;
@@ -20,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private bool _isWalking;
     [SerializeField]
     private bool isFloating;
+
+    private Animator _playerAnimator;
     private Animator _loopAnimator;
     private SpriteRenderer _loopSprite;
     
@@ -31,6 +36,7 @@ public class PlayerController : MonoBehaviour
         _boxCollider = gameObject.GetComponent<BoxCollider2D>();
         isGrounded = true;
         _isWalking = false;
+        _playerAnimator = gameObject.GetComponent<Animator>();
         _loopAnimator = transform.Find("Loop").GetComponent<Animator>();
         _loopSprite = transform.Find("Loop").GetComponent<SpriteRenderer>();
     }
@@ -53,7 +59,13 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetAxisRaw("Horizontal") != 0)
+        {
             Move();
+        }
+        else
+        {
+            Idle();
+        }
 
         if (Input.GetKey(KeyCode.Space) && isGrounded)
             Jump();
@@ -70,6 +82,24 @@ public class PlayerController : MonoBehaviour
         {
             Ground();
         }
+        _playerAnimator.SetTrigger(Move1);
+        
+        Vector3 scale = transform.localScale;
+        if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            scale.x = -1;
+        }
+        else
+        {
+            scale.x = 1;
+        }
+
+        transform.localScale = scale;
+    }
+
+    private void Idle()
+    {
+        _playerAnimator.SetTrigger(Idle1);
     }
 
     private void Spring()
