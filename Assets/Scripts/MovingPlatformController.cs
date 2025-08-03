@@ -66,6 +66,15 @@ public class MovingPlatformController : MonoBehaviour
     {
         if (_startPoint != null && _endPoint != null)
         {
+            if (!Mathf.Approximately(_startPoint.transform.position.y, _endPoint.transform.position.y))
+            {
+                Gizmos.color = new Color(1f, 0f, 0f, 1); // Yellow with custom alpha
+            }
+            else
+            {
+                Gizmos.color = new Color(0f, 1f, 0f, 1); // Yellow with custom alpha
+            }
+            
             Gizmos.DrawLine(_startPoint.transform.position, _endPoint.transform.position);
         }
     }
